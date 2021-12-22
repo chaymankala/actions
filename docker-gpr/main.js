@@ -9,11 +9,11 @@ async function run() {
   const imageName = core.getInput("image-name").toLowerCase();
   const githubRepo = process.env.GITHUB_REPOSITORY.toLowerCase();
   const tag = core.getInput("tag").toLowerCase();
-  const fullImageReference = `docker.pkg.github.com/${githubRepo}/${imageName}:${tag}`;
+  const fullImageReference = `ghcr.io/${githubRepo}:${tag}`;
   
   try {
     await exec.exec(
-      `docker login docker.pkg.github.com -u ${username} -p ${token}`
+      `docker login ghcr.io -u ${username} -p ${token}`
     );
   } catch (err) {
     core.setFailed(`action failed with error: ${err}`);
